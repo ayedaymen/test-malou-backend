@@ -40,9 +40,8 @@ describe('PostsController', () => {
           name:"46aea",
           votes_count: 152588447,
           day:"string" }];
-          mockedAxios.get.mockImplementationOnce(() => Promise.resolve(result));
-
-        expect(await controller.getPostByDay("2021-01-05")).toBe(result);
+          jest.spyOn(postsService, 'getPosts').mockImplementation(() => Promise.resolve(result));
+        expect(await controller.getPostByDay("01-05-2021")).toBe(result);
       });
     });
   });
