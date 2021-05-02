@@ -14,16 +14,13 @@ describe('PostsController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [PostsController],
-     
+     providers:[PostsService]
     
     }).compile();
 
     controller = module.get<PostsController>(PostsController);
   });
 
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
-  });
 
   describe('PostsController', () => {
     
@@ -31,7 +28,7 @@ describe('PostsController', () => {
       postsService  = new PostsService();
       controller = new PostsController(postsService);
     });
-    describe('findAll', () => {
+    describe('getPostByDay', () => {
       it('should return an array of posts', async () => {
 
         const result = [{ id: 1,
@@ -45,7 +42,7 @@ describe('PostsController', () => {
           day:"string" }];
           mockedAxios.get.mockImplementationOnce(() => Promise.resolve(result));
 
-        expect(await controller.getPostByDay("2021-02-04")).toBe(result);
+        expect(await controller.getPostByDay("2021-01-05")).toBe(result);
       });
     });
   });

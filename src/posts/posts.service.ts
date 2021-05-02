@@ -12,14 +12,14 @@ export class PostsService {
         const response = await axios.get(`https://api.producthunt.com/v1/posts?day=${day}`);
         let x=[];
         let posts:Posts[];
-        for (let i = 0; i < response.data.posts.length; i++) {
-            x.push({
-                id: response.data.posts[i].id,
-                name: response.data.posts[i].name,
-                votes_count: response.data.posts[i].votes_count,
-                day: response.data.posts[i].day
+        response.data.posts.forEach(element => {
+           x.push({ 
+                id: element.id,
+                name: element.name,
+                votes_count: element.votes_count,
+                day: element.day
             })
-        }
+        }); 
 
         return  posts=x;
     }
